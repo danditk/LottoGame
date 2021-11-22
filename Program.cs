@@ -34,10 +34,10 @@ namespace LottoGame
                         Console.Clear();
                         Console.WriteLine("Dzień: {0}", dzien);
                         Console.WriteLine("witaj w grze LOTTO, dziś do wygrania jest aż {0}zł", kumulacja);
-                        Console.WriteLine("\n Stan konta: {0}zł", pieniadze);
+                        Console.WriteLine("\nStan konta: {0}zł", pieniadze);
                         WyswietlKupon(kupon);
 
-                        // TODO:MENU
+                        //MENU
                         if (pieniadze >= 3 && losow < 8)
                         {
                             Console.WriteLine("1 - Postaw los - 3zł [{0}/8]", losow + 1);
@@ -46,7 +46,7 @@ namespace LottoGame
                         Console.WriteLine("2 - Sprawdź kupon - losowanie");
                         Console.WriteLine("3 - Zakończ grę");
 
-                        // TODO:MENU
+                        //MENU
 
                         wybor = Console.ReadKey().Key;
                         if (wybor == ConsoleKey.D1 && pieniadze >= 3 && losow < 8)
@@ -103,8 +103,26 @@ namespace LottoGame
 
         private static void WyswietlKupon(List<int[]> kupon)
         {
+            if (kupon.Count == 0)
+            {
+                Console.WriteLine("Nie postawiłeś jeszcze żadnych losów.");
+            }
+            else
+            {
+                int i = 0;
+                Console.WriteLine("\nTWÓJ KUPON:");
+                foreach (int[] los in kupon)
+                {
+                    i++;
+                    Console.WriteLine(i + ": ");
+                    foreach (int liczba in los)
+                    {
+                        Console.Write(liczba + ", ");
+                    }
 
-
+                    Console.WriteLine();
+                }
+            }
         }
     }
 }
