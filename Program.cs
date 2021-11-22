@@ -52,17 +52,48 @@ namespace LottoGame
                         if (wybor == ConsoleKey.D1 && pieniadze >= 3 && losow < 8)
                         {
                             kupon.Add(item: PostawLos());
+                            pieniadze -= 3;
+                            losow++;
                         }
 
 
-                    } while (b);
+                    } while (wybor == ConsoleKey.D1);
+                    Console.Clear();
+                    if (kupon.Count > 0)
+                    {
+                        int wygrana = Sprawdz(kupon);
+                        if (wygrana >0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine("\nBrawo wygrałeś {0} w tym losowaniu!", wygrana);
+                            Console.ResetColor();
+                            pieniadze += wygrana;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nNiestety nic nie wygrałeś w tym losowaniu!");
+                            Console.ResetColor();
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie miełeś losów w tym losowaniu.");
+                    }
 
+                    Console.WriteLine("Enter - kontynułuj.");
+                    Console.ReadKey();
 
                 } while (pieniadze >= 3 && wybor != ConsoleKey.D3);
 
                 Console.WriteLine("Dzień {0}. \nKoniec gry, Twoj wynik to : {1} zł", dzien, pieniadze - START);
                 Console.WriteLine("Enter - graj od nowa.");
             } while (Console.ReadKey().Key == ConsoleKey.Enter);
+        }
+
+        private static int Sprawdz(List<int[]> kupon)
+        {
+            throw new NotImplementedException();
         }
 
         private static int[] PostawLos()
