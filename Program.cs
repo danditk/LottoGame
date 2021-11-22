@@ -32,7 +32,7 @@ namespace LottoGame
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("Dzień: {0}", dzien);
+                        Console.WriteLine("\nDzień: {0}", dzien);
                         Console.WriteLine("witaj w grze LOTTO, dziś do wygrania jest aż {0}zł", kumulacja);
                         Console.WriteLine("\nStan konta: {0}zł", pieniadze);
                         WyswietlKupon(kupon);
@@ -62,7 +62,7 @@ namespace LottoGame
                     if (kupon.Count > 0)
                     {
                         int wygrana = Sprawdz(kupon);
-                        if (wygrana >0)
+                        if (wygrana > 0)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
                             Console.WriteLine("\nBrawo wygrałeś {0} w tym losowaniu!", wygrana);
@@ -86,7 +86,7 @@ namespace LottoGame
 
                 } while (pieniadze >= 3 && wybor != ConsoleKey.D3);
 
-                Console.WriteLine("Dzień {0}. \nKoniec gry, Twoj wynik to : {1} zł", dzien, pieniadze - START);
+                Console.WriteLine("\nDzień {0}. \nKoniec gry, Twoj wynik to : {1} zł", dzien, pieniadze - START);
                 Console.WriteLine("Enter - graj od nowa.");
             } while (Console.ReadKey().Key == ConsoleKey.Enter);
         }
@@ -94,11 +94,42 @@ namespace LottoGame
         private static int Sprawdz(List<int[]> kupon)
         {
             throw new NotImplementedException();
+            //TODO: METHOD
         }
 
         private static int[] PostawLos()
         {
-            throw new NotImplementedException();
+            int[] liczby = new int[6];
+            int liczba = -1;
+            for (int i = 0; i < liczby.Length; i++)
+            {
+                liczba = -1;
+                Console.Clear();
+                Console.Write("Postawione liczny: ");
+                foreach (int l in liczby)
+                {
+                    if (l > 0)
+                    {
+                        Console.Write(l + ", ");
+                    }
+                }
+
+                Console.WriteLine("\n\nWybierz liczbę od 1 do 49:");
+                Console.Write("{0}/6: ", i + 1);
+                bool prawidlowa = int.TryParse(Console.ReadLine(), out liczba);
+                if (prawidlowa && liczba >= 1 && liczba <= 49 && !liczby.Contains(liczba))
+                {
+                    liczby[i] = liczba;
+                }
+                else
+                {
+                    Console.WriteLine("Niestety, liczba jest błędna");
+                    i--;
+                    Console.ReadKey();
+                }
+            }
+            Array.Sort(liczby);
+            return liczby;
         }
 
         private static void WyswietlKupon(List<int[]> kupon)
@@ -114,7 +145,7 @@ namespace LottoGame
                 foreach (int[] los in kupon)
                 {
                     i++;
-                    Console.WriteLine(i + ": ");
+                    Console.Write(i + ": ");
                     foreach (int liczba in los)
                     {
                         Console.Write(liczba + ", ");
