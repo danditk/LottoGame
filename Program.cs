@@ -94,7 +94,6 @@ namespace LottoGame
 
         private static int Sprawdz(List<int[]> kupon)
         {
-            int wygrana = 0;
             int[] wylosowane = new int[6];
             for (int i = 0; 0 < wylosowane.Length; i++)
             {
@@ -118,6 +117,35 @@ namespace LottoGame
             }
 
             int[] trafione = SprawdzKupon(kupon, wylosowane);
+            int wartosc = 0;
+            int wygrana = 0;
+
+            Console.WriteLine();
+
+            if (trafione[0] > 0)
+            {
+                wartosc = trafione[0] * 24;
+                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[0], wartosc);
+                wygrana += wartosc;
+            }
+            if (trafione[1] > 0)
+            {
+                wartosc = trafione[1] * rnd.Next(100,301);
+                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[1], wartosc);
+                wygrana += wartosc;
+            }
+            if (trafione[2] > 0)
+            {
+                wartosc = trafione[2] * rnd.Next(4000, 8001);
+                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[2], wartosc);
+                wygrana += wartosc;
+            }
+            if (trafione[3] > 0)
+            {
+                wartosc = (trafione[3] * kumulacja) / (trafione[3] + rnd.Next(0, 4));
+                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[3], wartosc);
+                wygrana += wartosc;
+            }
 
             return wygrana;
         }
