@@ -66,7 +66,7 @@ namespace LottoGame
                         if (wygrana > 0)
                         {
                             Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine("\nBrawo wygrałeś {0} w tym losowaniu!", wygrana);
+                            Console.WriteLine("\nBrawo wygrałeś {0}zł w tym losowaniu!", wygrana);
                             Console.ResetColor();
                             pieniadze += wygrana;
                         }
@@ -95,9 +95,9 @@ namespace LottoGame
         private static int Sprawdz(List<int[]> kupon)
         {
             int[] wylosowane = new int[6];
-            for (int i = 0; 0 < wylosowane.Length; i++)
+            for (int i = 0; i < wylosowane.Length; i++)
             {
-                int los = rnd.Next(1, 50);
+                int los = rnd.Next(1, 10);//int los = rnd.Next(1, 50);
                 if (!wylosowane.Contains(los))
                 {
                     wylosowane[i] = los;
@@ -117,8 +117,8 @@ namespace LottoGame
             }
 
             int[] trafione = SprawdzKupon(kupon, wylosowane);
-            int wartosc = 0;
             int wygrana = 0;
+            int wartosc = 0;
 
             Console.WriteLine();
 
@@ -131,19 +131,19 @@ namespace LottoGame
             if (trafione[1] > 0)
             {
                 wartosc = trafione[1] * rnd.Next(100,301);
-                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[1], wartosc);
+                Console.WriteLine("4 Trafienia: {0} + {1}zł", trafione[1], wartosc);
                 wygrana += wartosc;
             }
             if (trafione[2] > 0)
             {
                 wartosc = trafione[2] * rnd.Next(4000, 8001);
-                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[2], wartosc);
+                Console.WriteLine("5 Trafień: {0} + {1}zł", trafione[2], wartosc);
                 wygrana += wartosc;
             }
             if (trafione[3] > 0)
             {
-                wartosc = (trafione[3] * kumulacja) / (trafione[3] + rnd.Next(0, 4));
-                Console.WriteLine("3 Trafienia: {0} + {1}zł", trafione[3], wartosc);
+                wartosc = (trafione[3] * kumulacja) / (trafione[3] + rnd.Next(0, 5));
+                Console.WriteLine("6 Trafień: {0} + {1}zł", trafione[3], wartosc);
                 wygrana += wartosc;
             }
 
