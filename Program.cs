@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LottoGame
@@ -93,8 +94,80 @@ namespace LottoGame
 
         private static int Sprawdz(List<int[]> kupon)
         {
-            throw new NotImplementedException();
-            //TODO: METHOD
+            int wygrana = 0;
+            int[] wylosowane = new int[6];
+            for (int i = 0; 0 < wylosowane.Length; i++)
+            {
+                int los = rnd.Next(1, 50);
+                if (!wylosowane.Contains(los))
+                {
+                    wylosowane[i] = los;
+                }
+                else
+                {
+                    i--;
+                }
+            }
+
+            Array.Sort(wylosowane);
+            Console.Write("Wylosowane liczby to: ");
+            foreach (var liczba in wylosowane)
+            {
+                Console.Write(liczba + ", ");
+                Thread.Sleep(1000);
+            }
+
+            int[] trafione = SprawdzKupon(kupon, wylosowane);
+
+            return wygrana;
+        }
+
+        private static int[] SprawdzKupon(List<int[]> kupon, int[] wylosowane)
+        {
+            int[] wygrane = new int[4];
+            int i = 0;
+            Console.WriteLine("\n\nTWÓJ KUPON: ");
+
+            foreach (int[] los in kupon)
+            {
+                i++;
+                Console.WriteLine(i + ": ");
+                int trafien = 0;
+                foreach (int liczba in los)
+                {
+                    if (wylosowane.Contains(liczba))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write(liczba + ", ");
+                        Console.ResetColor();
+                        trafien++;
+                    }
+                    else
+                    {
+                        Console.Write(liczba + ", ");
+                    }
+                }
+
+                switch (trafien)
+                {
+                    case 3:
+                        wygrane[0]++;
+                        break;
+                    case 4:
+                        wygrane[1]++;
+                        break;
+                    case 5:
+                        wygrane[2]++;
+                        break;
+                    case 6:
+                        wygrane[3]++;
+                        break;
+                }
+
+                Console.WriteLine(" - Trafiono {0}/6", trafien);
+            }
+
+            return wygrane;
         }
 
         private static int[] PostawLos()
