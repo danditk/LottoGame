@@ -97,7 +97,8 @@ namespace LottoGame
             int[] wylosowane = new int[6];
             for (int i = 0; i < wylosowane.Length; i++)
             {
-                int los = rnd.Next(1, 10);//int los = rnd.Next(1, 50);
+                //int los = rnd.Next(1, 10);
+                int los = rnd.Next(1, 50);
                 if (!wylosowane.Contains(los))
                 {
                     wylosowane[i] = los;
